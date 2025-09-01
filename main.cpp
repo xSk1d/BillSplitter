@@ -1,38 +1,33 @@
 #include <iostream>
-#include <string>
-using i64 = long long;
+#include <iomanip>
+using namespace std;
 
 int main(){
+    double total;
+    int people;
 
-    std::string moneyString;
-    std::cout << "Enter total: ";
-    std::cin >> moneyString;
+    cout << "=== Bill Splitter v1 ===\n";
+    cout << "Enter total amount: ";
+    cin >> total;
 
-    std::string cleaned;
-    for (char character : moneyString) {
-        if (character != ' ') cleaned += character;
-    }
-    std::cout << "Cleaned: " << cleaned << std::endl;
-    auto dot = cleaned.find('.');
-    if (dot == std::string::npos) {
-        std::cout << "No decimal point." << std::endl;
-    } else {
-        std::cout << "Decimal at index: " << dot << std::endl;
+    if (cin.fail() || total < 0) {
+        cout << "Invalid total amount entered.\n";
+        return 1;
     }
 
-    std::string dollars, cents;
-    
-    if (dot == std::string::npos) {
-        dollars = cleaned; 
-        cents = "00";
-    } else {
-        dollars = cleaned.substr(0, dot);
-        cents = cleaned.substr(dot +1);
+    cout << "Enter number of people: ";
+    cin >> people;
+
+    if (cin.fail() || people <= 0) {
+        cout << "Who are you splitting with? Ghosts?\n";
+        return 1;
     }
+   
+    double share  = total/people;
 
-    if (cents.size() == 0)  cents = "00";
-    else if (cents.size () == 1) cents += "0";
-    else if (cents.size() > 2) cents.resize(2);
+    cout << fixed << setprecision(2);
+    cout << "\nTotal: $" << total << "\n";
+    cout << "Each person pays: $" << share << "\n";
 
-return 0;
+    return 0;
 }
