@@ -30,4 +30,7 @@ int main(){
     cout << "Each person pays: $" << share << "\n";
 
     return 0;
+
+    cout << "git test";
+    cout << "hi";
 }
